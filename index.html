@@ -12,9 +12,10 @@
     }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #1e3d29; /* Latar hijau elegan (tidak terlalu tua/muda) */
+      background-color: #1e3d29;
       color: #ffffff;
       padding: 20px 10px;
+      overflow-x: hidden;
     }
     header {
       text-align: center;
@@ -26,55 +27,109 @@
       margin-bottom: 8px;
     }
     header p {
-      color: #d4af37; /* Emas */
+      color: #d4af37;
       font-size: 1rem;
       font-weight: 500;
       letter-spacing: 0.5px;
     }
     .gallery {
       display: grid;
-      grid-template-columns: repeat(2, 1fr); /* Tampilan 2 kolom (2-2) */
-      gap: 12px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
       max-width: 800px;
       margin: 20px auto;
     }
+    
+    /* Container untuk efek 3D flip & zoom */
+    .card-container {
+      perspective: 1000px;
+      height: 230px;
+    }
+
     .card {
-      background: #ffffff; /* Kartu foto berwarna putih */
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+
+    /* Efek Zoom/Maju saat kartu aktif diklik */
+    .card-container.active {
+      z-index: 10;
+    }
+    .card-container.active .card {
+      transform: scale(1.08) rotateY(180deg);
+    }
+
+    /* Sisi Depan & Belakang Kartu */
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
       border-radius: 12px;
       overflow: hidden;
-      border: 1.5px solid #d4af37; /* Sentuhan lis emas */
+      border: 1.5px solid #d4af37;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-      transition: transform 0.3s ease;
     }
-    .card:hover {
-      transform: translateY(-4px);
+
+    /* Tampilan Depan */
+    .card-front {
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
     }
-    .card img {
+    .card-front img {
       width: 100%;
-      height: 160px; /* Disesuaikan agar pas di layar HP */
+      height: 160px;
       object-fit: cover;
       display: block;
     }
-    .card-body {
+    .card-front .card-body {
       padding: 10px 8px;
       text-align: center;
       background: #ffffff;
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .card-body h3 {
+    .card-front h3 {
       font-size: 0.95rem;
-      color: #1e3d29; /* Judul hijau */
-      margin-bottom: 4px;
+      color: #1e3d29;
     }
-    .card-body p {
-      font-size: 0.8rem;
-      color: #555555;
-      line-height: 1.2;
+
+    /* Tampilan Belakang (Kemunculan Keterangan) */
+    .card-back {
+      background: linear-gradient(135deg, #d4af37, #aa820a);
+      color: #ffffff;
+      transform: rotateY(180deg);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+      text-align: center;
     }
+    .card-back h3 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+      color: #1e3d29;
+      text-shadow: 0 1px 2px rgba(255,255,255,0.4);
+    }
+    .card-back p {
+      font-size: 0.85rem;
+      line-height: 1.4;
+      color: #ffffff;
+    }
+
     footer {
       text-align: center;
       margin-top: 30px;
       padding: 15px;
-      color: #d4af37; /* Teks emas */
+      color: #d4af37;
       font-size: 0.85rem;
       border-top: 1px solid rgba(212, 175, 55, 0.4);
     }
@@ -89,81 +144,153 @@
 
   <main class="gallery">
     <!-- Foto 1 -->
-    <div class="card">
-      <img src="20261002_121836.jpg" alt="Kenangan 1">
-      <div class="card-body">
-        <h3>Hari Batik</h3>
-        <p>Momen kita ngehabisin waktu bareng.</p>
+    <div class="card-container" onclick="flipCard(this)">
+      <div class="card">
+        <div class="card-front">
+          <img src="20261002_121836.jpg" alt="Kenangan 1">
+          <div class="card-body">
+            <h3>Hari Batik</h3>
+          </div>
+        </div>
+        <div class="card-back">
+          <h3>Hari Batik</h3>
+          <p>Momen kita ngehabisin waktu bareng.</p>
+        </div>
       </div>
     </div>
 
     <!-- Foto 2 -->
-    <div class="card">
-      <img src="IMG-20260724-WA0000.jpg" alt="Kenangan 2">
-      <div class="card-body">
-        <h3>Demos</h3>
-        <p>Momen aku nemenin demos.</p>
+    <div class="card-container" onclick="flipCard(this)">
+      <div class="card">
+        <div class="card-front">
+          <img src="IMG-20260724-WA0000.jpg" alt="Kenangan 2">
+          <div class="card-body">
+            <h3>Demos</h3>
+          </div>
+        </div>
+        <div class="card-back">
+          <h3>Demos</h3>
+          <p>Momen aku nemenin demos.</p>
+        </div>
       </div>
     </div>
 
     <!-- Foto 3 -->
-    <div class="card">
-      <img src="IMG-20260824-WA0079.jpg" alt="Kenangan 3">
-      <div class="card-body">
-        <h3>Momen Maulid Nabi</h3>
-        <p>Fotbarnya lucu.</p>
+    <div class="card-container" onclick="flipCard(this)">
+      <div class="card">
+        <div class="card-front">
+          <img src="IMG-20260824-WA0079.jpg" alt="Kenangan 3">
+          <div class="card-body">
+            <h3>Momen Maulid Nabi</h3>
+          </div>
+        </div>
+        <div class="card-back">
+          <h3>Momen Maulid Nabi</h3>
+          <p>Fotbarnya lucu.</p>
+        </div>
       </div>
     </div>
 
     <!-- Foto 4 -->
-    <div class="card">
-      <img src="IMG-20260915-WA0016.jpg" alt="Kenangan 4">
-      <div class="card-body">
-        <h3>Uji Tanding</h3>
-        <p>Waktu aku nemenin ayangg uji tanding.</p>
+    <div class="card-container" onclick="flipCard(this)">
+      <div class="card">
+        <div class="card-front">
+          <img src="IMG-20260915-WA0016.jpg" alt="Kenangan 4">
+          <div class="card-body">
+            <h3>Uji Tanding</h3>
+          </div>
+        </div>
+        <div class="card-back">
+          <h3>Uji Tanding</h3>
+          <p>Waktu aku nemenin ayangg uji tanding.</p>
+        </div>
       </div>
     </div>
-  </main>
 
-  <div class="card">
-      <img src="IMG-20260915-WA0018.jpg" alt="Kenangan 5">
-      <div class="card-body">
-        <h3>Ramadhan</h3>
-        <p>Waktu lagi ada acara puncak Ramadhan.</p>
+    <!-- Foto 5 -->
+    <div class="card-container" onclick="flipCard(this)">
+      <div class="card">
+        <div class="card-front">
+          <img src="IMG-20260915-WA0018.jpg" alt="Kenangan 5">
+          <div class="card-body">
+            <h3>Ramadhan</h3>
+          </div>
+        </div>
+        <div class="card-back">
+          <h3>Ramadhan</h3>
+          <p>Waktu lagi ada acara puncak Ramadhan.</p>
+        </div>
       </div>
     </div>
-  </main>
 
-  <div class="card">
-      <img src="IMG-20260915-WA0115.jpg" alt="Kenangan 6">
-      <div class="card-body">
-        <h3>Momen Random</h3>
-        <p>Waktu aku nemenin ayangg nunggu jemputan.</p>
+    <!-- Foto 6 -->
+    <div class="card-container" onclick="flipCard(this)">
+      <div class="card">
+        <div class="card-front">
+          <img src="IMG-20260915-WA0115.jpg" alt="Kenangan 6">
+          <div class="card-body">
+            <h3>Momen Random</h3>
+          </div>
+        </div>
+        <div class="card-back">
+          <h3>Momen Random</h3>
+          <p>Waktu aku nemenin ayangg nunggu jemputan.</p>
+        </div>
       </div>
     </div>
-  </main>
 
-  <div class="card">
-      <img src="IMG-20260922-WA0026.jpg" alt="Kenangan 7">
-      <div class="card-body">
-        <h3>Momen Random</h3>
-        <p>Waktuu Habis berantem hehe, terus nunggu forum.</p>
+    <!-- Foto 7 -->
+    <div class="card-container" onclick="flipCard(this)">
+      <div class="card">
+        <div class="card-front">
+          <img src="IMG-20260922-WA0026.jpg" alt="Kenangan 7">
+          <div class="card-body">
+            <h3>Momen Random</h3>
+          </div>
+        </div>
+        <div class="card-back">
+          <h3>Momen Random</h3>
+          <p>Waktuu Habis berantem hehe, terus nunggu forum.</p>
+        </div>
       </div>
     </div>
-  </main>
 
- <div class="card">
-      <img src="20260716_103739.jpg" alt="Kenangan 8">
-      <div class="card-body">
-        <h3>Awal masuk sekolah</h3>
-        <p>Waktu hp aku udah balik lagii.</p>
+    <!-- Foto 8 -->
+    <div class="card-container" onclick="flipCard(this)">
+      <div class="card">
+        <div class="card-front">
+          <img src="20260716_103739.jpg" alt="Kenangan 8">
+          <div class="card-body">
+            <h3>Awal masuk sekolah</h3>
+          </div>
+        </div>
+        <div class="card-back">
+          <h3>Awal masuk sekolah</h3>
+          <p>Waktu hp aku udah balik lagii.</p>
+        </div>
       </div>
     </div>
+
   </main>
 
   <footer>
     <p>Dibuat dengan ✨ untukmu</p>
   </footer>
+
+  <script>
+    function flipCard(container) {
+      // Jika kartu sudah aktif, abaikan klik berulang
+      if (container.classList.contains('active')) return;
+
+      // Tambahkan kelas active untuk mentrigger animasi zoom & flip
+      container.classList.add('active');
+
+      // Kembalikan ke posisi semula setelah 1,5 detik (1500 ms)
+      setTimeout(() => {
+        container.classList.remove('active');
+      }, 1500);
+    }
+  </script>
 
 </body>
 </html>
