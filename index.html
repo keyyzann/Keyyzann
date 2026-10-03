@@ -1,196 +1,127 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ nama_ai }} - AI Assistant</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        body {
-            background-color: #0b0e14;
-            color: #e1e7ec;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-        }
-
-        /* Header Futuristik JARVIS */
-        header {
-            background-color: #121824;
-            padding: 18px;
-            text-align: center;
-            font-size: 1.4rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: #00d2ff;
-            border-bottom: 1px solid #1e293b;
-            box-shadow: 0 2px 10px rgba(0, 210, 255, 0.1);
-        }
-
-        /* Area Percakapan */
-        #chat-container {
-            flex: 1;
-            overflow-y: auto;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .message {
-            max-width: 80%;
-            padding: 14px 18px;
-            border-radius: 12px;
-            line-height: 1.6;
-            word-wrap: break-word;
-            white-space: pre-wrap;
-            font-size: 0.95rem;
-        }
-
-        .user-message {
-            align-self: flex-end;
-            background: linear-gradient(135deg, #0052d4, #4364f7);
-            color: #ffffff;
-            border-bottom-right-radius: 2px;
-            box-shadow: 0 2px 8px rgba(67, 100, 247, 0.3);
-        }
-
-        .ai-message {
-            align-self: flex-start;
-            background-color: #1a2332;
-            color: #e1e7ec;
-            border: 1px solid #2a364f;
-            border-bottom-left-radius: 2px;
-        }
-
-        /* Input Container */
-        #input-container {
-            background-color: #121824;
-            padding: 16px;
-            display: flex;
-            gap: 12px;
-            border-top: 1px solid #1e293b;
-        }
-
-        #user-input {
-            flex: 1;
-            padding: 14px;
-            border-radius: 8px;
-            border: 1px solid #2a364f;
-            background-color: #0b0e14;
-            color: #ffffff;
-            font-size: 1rem;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-
-        #user-input:focus {
-            border-color: #00d2ff;
-        }
-
-        button {
-            padding: 14px 24px;
-            background: linear-gradient(135deg, #00d2ff, #0072ff);
-            color: #ffffff;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: opacity 0.2s;
-        }
-
-        button:hover {
-            opacity: 0.9;
-        }
-
-        .typing-indicator {
-            font-style: italic;
-            color: #00d2ff;
-            opacity: 0.8;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galeri Kenangan Kita 💕</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fff5f7;
+      color: #333;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      padding: 40px 10px 20px;
+    }
+    header h1 {
+      color: #e91e63;
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+    }
+    header p {
+      color: #666;
+      font-size: 1rem;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 10px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+    .card-body {
+      padding: 15px;
+      text-align: center;
+    }
+    .card-body h3 {
+      font-size: 1.1rem;
+      color: #d81b60;
+      margin-bottom: 5px;
+    }
+    .card-body p {
+      font-size: 0.9rem;
+      color: #777;
+    }
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      color: #888;
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 <body>
 
-    <header>
-        ⚡ {{ nama_ai }} PROTOCOL
-    </header>
+  <header>
+    <h1>Galeri Kenangan Kita 💕</h1>
+    <p>Setiap momen bersamamu adalah cerita favoritku.</p>
+  </header>
 
-    <div id="chat-container">
-        <div class="message ai-message">
-            Sistem online. Halo, saya <strong>{{ nama_ai }}</strong>. Ada yang bisa saya bantu hari ini?
-        </div>
+  <main class="gallery">
+    <!-- Foto 1 -->
+    <div class="card">
+      <img src="https://picsum.photos/400/300?random=1" alt="Kenangan 1">
+      <div class="card-body">
+        <h3>Awal Bertemu</h3>
+        <p>Momen pertama kali kita jalan bareng.</p>
+      </div>
     </div>
 
-    <div id="input-container">
-        <input type="text" id="user-input" placeholder="Ketik perintah atau pertanyaan untuk JARVIS..." onkeypress="handleKeyPress(event)">
-        <button onclick="sendMessage()">Kirim</button>
+    <!-- Foto 2 -->
+    <div class="card">
+      <img src="https://picsum.photos/400/300?random=2" alt="Kenangan 2">
+      <div class="card-body">
+        <h3>Jalan-jalan Pertama</h3>
+        <p>Liburan singkat tapi berkesan banget.</p>
+      </div>
     </div>
 
-    <script>
-        async function sendMessage() {
-            const inputField = document.getElementById('user-input');
-            const chatContainer = document.getElementById('chat-container');
-            const messageText = inputField.value.trim();
+    <!-- Foto 3 -->
+    <div class="card">
+      <img src="https://picsum.photos/400/300?random=3" alt="Kenangan 3">
+      <div class="card-body">
+        <h3>Makan Malam Bersama</h3>
+        <p>Cobain makanan enak berdua.</p>
+      </div>
+    </div>
 
-            if (!messageText) return;
+    <!-- Foto 4 -->
+    <div class="card">
+      <img src="https://picsum.photos/400/300?random=4" alt="Kenangan 4">
+      <div class="card-body">
+        <h3>Momen Lucu</h3>
+        <p>Foto ketawa ketawa ga jelas bareng kamu.</p>
+      </div>
+    </div>
+  </main>
 
-            // 1. Tampilkan pesan pengguna
-            appendMessage(messageText, 'user-message');
-            inputField.value = '';
+  <footer>
+    <p>Dibuat dengan ❤️ untukmu</p>
+  </footer>
 
-            // 2. Indikator JARVIS merespons
-            const typingDiv = document.createElement('div');
-            typingDiv.className = 'message ai-message typing-indicator';
-            typingDiv.id = 'typing-indicator';
-            typingDiv.innerText = 'JARVIS sedang memproses...';
-            chatContainer.appendChild(typingDiv);
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-
-            try {
-                // 3. Kirim permintaan ke server Python
-                const response = await fetch('/chat', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: messageText })
-                });
-
-                const data = await response.json();
-                
-                document.getElementById('typing-indicator').remove();
-
-                if (data.reply) {
-                    appendMessage(data.reply, 'ai-message');
-                } else {
-                    appendMessage('Error: ' + data.error, 'ai-message');
-                }
-            } catch (error) {
-                document.getElementById('typing-indicator').remove();
-                appendMessage('Gagal terhubung ke server JARVIS.', 'ai-message');
-            }
-        }
-
-        function appendMessage(text, className) {
-            const chatContainer = document.getElementById('chat-container');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${className}`;
-            messageDiv.innerText = text;
-            chatContainer.appendChild(messageDiv);
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }
-
-        function handleKeyPress(event) {
-            if (event.key === 'Enter') {
-                sendMessage();
-            }
-        }
-    </script>
 </body>
 </html>
