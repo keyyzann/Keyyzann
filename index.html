@@ -12,71 +12,71 @@
     }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f4f7f5;
-      color: #2b3a32;
-      padding: 20px;
+      background-color: #1e3d29; /* Latar hijau elegan (tidak terlalu tua/muda) */
+      color: #ffffff;
+      padding: 20px 10px;
     }
     header {
       text-align: center;
-      padding: 40px 10px 20px;
+      padding: 30px 10px 20px;
     }
     header h1 {
-      color: #2e6f40;
-      font-size: 2.2rem;
-      margin-bottom: 10px;
+      color: #ffffff;
+      font-size: 2rem;
+      margin-bottom: 8px;
     }
     header p {
-      color: #d4af37;
-      font-size: 1.1rem;
+      color: #d4af37; /* Emas */
+      font-size: 1rem;
       font-weight: 500;
       letter-spacing: 0.5px;
     }
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      max-width: 1000px;
-      margin: 30px auto;
-      padding: 10px;
+      grid-template-columns: repeat(2, 1fr); /* Tampilan 2 kolom (2-2) */
+      gap: 12px;
+      max-width: 800px;
+      margin: 20px auto;
     }
     .card {
-      background: #ffffff;
-      border-radius: 15px;
+      background: #ffffff; /* Kartu foto berwarna putih */
+      border-radius: 12px;
       overflow: hidden;
-      border: 1px solid rgba(212, 175, 55, 0.3);
-      box-shadow: 0 4px 15px rgba(46, 111, 64, 0.08);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1.5px solid #d4af37; /* Sentuhan lis emas */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      transition: transform 0.3s ease;
     }
     .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.25);
+      transform: translateY(-4px);
     }
     .card img {
       width: 100%;
-      height: 220px;
+      height: 160px; /* Disesuaikan agar pas di layar HP */
       object-fit: cover;
+      display: block;
     }
     .card-body {
-      padding: 15px;
+      padding: 10px 8px;
       text-align: center;
       background: #ffffff;
     }
     .card-body h3 {
-      font-size: 1.1rem;
-      color: #2e6f40;
-      margin-bottom: 5px;
+      font-size: 0.95rem;
+      color: #1e3d29; /* Judul hijau */
+      margin-bottom: 4px;
     }
     .card-body p {
-      font-size: 0.9rem;
-      color: #556b5d;
+      font-size: 0.8rem;
+      color: #555555;
+      line-height: 1.2;
     }
     footer {
       text-align: center;
-      margin-top: 40px;
-      padding: 20px;
-      color: #2e6f40;
-      font-size: 0.9rem;
-      border-top: 1px solid #d4af37;
+      margin-top: 30px;
+      padding: 15px;
+      color: #d4af37; /* Teks emas */
+      font-size: 0.85rem;
+      border-top: 1px solid rgba(212, 175, 55, 0.4);
     }
   </style>
 </head>
@@ -101,7 +101,7 @@
     <div class="card">
       <img src="foto2.jpg" alt="Kenangan 2">
       <div class="card-body">
-        <h3>Jalan-jalan Pertama</h3>
+        <h3>Jalan-jalan</h3>
         <p>Liburan singkat tapi berkesan banget.</p>
       </div>
     </div>
@@ -110,7 +110,7 @@
     <div class="card">
       <img src="foto3.jpg" alt="Kenangan 3">
       <div class="card-body">
-        <h3>Makan Malam Bersama</h3>
+        <h3>Makan Malam</h3>
         <p>Cobain makanan enak berdua.</p>
       </div>
     </div>
@@ -120,7 +120,7 @@
       <img src="foto4.jpg" alt="Kenangan 4">
       <div class="card-body">
         <h3>Momen Lucu</h3>
-        <p>Foto ketawa ketawa ga jelas bareng kamu.</p>
+        <p>Foto ketawa-ketawa bareng kamu.</p>
       </div>
     </div>
   </main>
