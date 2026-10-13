@@ -6,14 +6,14 @@
     <title>Little Diary: Tentang Waktu yang Kita Isi Bersama</title>
     <style>
         :root {
-            --bg-color: #f3eae1;
+            --bg-color: #2b2622;
             --book-bg: #fffbf7;
-            --text-color: #4a3b32;
+            --text-color: #36281e;
             --accent-color: #bc6c25;
             --accent-hover: #9b581e;
             --border-color: #e3d2c3;
             --soft-brown: #8c7355;
-            --shadow-color: rgba(74, 59, 50, 0.2);
+            --shadow-color: rgba(0, 0, 0, 0.4);
         }
 
         * {
@@ -25,8 +25,8 @@
         body {
             font-family: 'Georgia', serif;
             background-color: var(--bg-color);
-            /* Ganti 'background-landscape.jpg' dengan nama file gambar lanskap latar belakang halaman */
-            background-image: url('background-landscape.jpg');
+            /* Gambar Latar Belakang Layar Utama (Lanskap) */
+            background-image: url('main-background-landscape.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -38,19 +38,25 @@
             padding: 20px;
         }
 
+        /* Container Buku Utama */
         .book-container {
-            max-width: 900px;
+            max-width: 800px;
             width: 100%;
+            height: 680px;
             background-color: var(--book-bg);
-            padding: 50px 60px;
-            border-radius: 8px 16px 16px 8px;
-            box-shadow: 0 15px 40px var(--shadow-color), inset 10px 0 20px rgba(0,0,0,0.03);
+            /* Gambar Latar Belakang Khusus Setiap Lembar Halaman Buku */
+            background-image: url('page-background.jpg');
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px 18px 18px 8px;
+            box-shadow: 0 18px 45px var(--shadow-color), inset 12px 0 25px rgba(0, 0, 0, 0.06);
             border: 1px solid var(--border-color);
             position: relative;
-            min-height: 650px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            padding: 40px 50px;
+            overflow: hidden;
         }
 
         /* Efek Jilid Buku di Sisi Kiri */
@@ -60,39 +66,38 @@
             left: 0;
             top: 0;
             bottom: 0;
-            width: 25px;
-            background: linear-gradient(90deg, rgba(0,0,0,0.08), rgba(255,255,255,0.2), rgba(0,0,0,0.05));
+            width: 22px;
+            background: linear-gradient(90deg, rgba(0,0,0,0.15), rgba(255,255,255,0.2), rgba(0,0,0,0.08));
             border-radius: 8px 0 0 8px;
-            border-right: 1px solid var(--border-color);
+            border-right: 1px solid rgba(0, 0, 0, 0.1);
+            z-index: 10;
         }
 
-        .page {
+        .view-section {
             display: none;
-            flex-grow: 1;
+            height: 100%;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        .page.active {
-            display: block;
+        .view-section.active {
+            display: flex;
         }
 
-        /* Cover & Back Cover Page Styling */
+        /* Cover & Back Cover Styling */
         .cover-page, .back-cover-page {
             text-align: center;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            flex-grow: 1;
         }
 
         .cover-image-container {
             width: 100%;
-            max-width: 280px;
-            margin: 0 auto 20px auto;
+            max-width: 260px;
+            margin: 0 auto 15px auto;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
             border: 3px solid #faedcd;
         }
 
@@ -105,81 +110,36 @@
         .cover-page h1, .back-cover-page h1 {
             font-size: 2rem;
             color: var(--text-color);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             font-family: serif;
         }
 
         .cover-page p, .back-cover-page p {
-            font-size: 1.05rem;
-            color: var(--soft-brown);
-            margin-bottom: 25px;
-            text-align: center;
-        }
-
-        .btn {
-            background-color: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            font-size: 0.95rem;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: background 0.2s, transform 0.1s;
-            font-weight: 600;
-            box-shadow: 0 4px 12px rgba(188, 108, 37, 0.2);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        .btn:hover {
-            background-color: var(--accent-hover);
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background-color: #dda15e;
-        }
-
-        .btn-secondary:hover {
-            background-color: var(--accent-hover);
-        }
-
-        h2.section-title {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: var(--accent-color);
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 8px;
-            font-family: serif;
-        }
-
-        .chapter-content-body p {
-            margin-bottom: 16px;
-            line-height: 1.8;
-            text-align: justify;
             font-size: 1rem;
-            font-family: 'Georgia', serif;
+            color: var(--soft-brown);
+            margin-bottom: 20px;
         }
 
-        /* Menu Grid for Chapters */
+        /* Grid Daftar Isi */
         .chapter-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
             gap: 10px;
             margin-top: 15px;
             margin-bottom: 20px;
-            max-height: 380px;
+            max-height: 420px;
             overflow-y: auto;
             padding-right: 5px;
         }
 
         .chapter-btn {
-            background-color: #fefae0;
+            background-color: rgba(254, 250, 224, 0.85);
             border: 1px solid var(--border-color);
             padding: 10px;
             border-radius: 6px;
             cursor: pointer;
             text-align: center;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: 600;
             color: var(--text-color);
             transition: all 0.2s;
@@ -194,43 +154,104 @@
         }
 
         .special-section-btn {
-            background-color: #faedcd;
+            background-color: rgba(250, 237, 205, 0.9);
             color: #603813;
         }
 
+        /* Area Teks E-Book Per Halaman */
+        .reader-header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+        }
+
+        h2.section-title {
+            font-size: 1.35rem;
+            color: var(--accent-color);
+            font-family: serif;
+        }
+
+        .reader-body {
+            flex-grow: 1;
+            overflow: hidden;
+            position: relative;
+            line-height: 1.8;
+            font-size: 1.02rem;
+            text-align: justify;
+        }
+
+        .reader-body p {
+            margin-bottom: 14px;
+            text-indent: 1.5em;
+        }
+
+        .chat-screenshot {
+            background: rgba(254, 250, 224, 0.9);
+            border: 1px dashed var(--accent-color);
+            padding: 10px;
+            text-align: center;
+            margin: 12px 0;
+            border-radius: 6px;
+            color: var(--soft-brown);
+            font-style: italic;
+            font-size: 0.9rem;
+            text-indent: 0;
+        }
+
+        .dedication {
+            text-align: center;
+            font-style: italic;
+            margin-top: 20px;
+            font-weight: bold;
+            color: var(--accent-color);
+            text-indent: 0;
+        }
+
+        /* Navigasi dan Bawah Halaman */
         .nav-buttons {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 30px;
             border-top: 1px solid var(--border-color);
-            padding-top: 15px;
+            padding-top: 12px;
+            margin-top: 10px;
         }
 
-        .page-number {
+        .btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            font-weight: 600;
+            font-family: 'Segoe UI', sans-serif;
+            box-shadow: 0 3px 8px rgba(188, 108, 37, 0.2);
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background-color: #dda15e;
+        }
+
+        .page-indicator {
             font-size: 0.85rem;
             color: var(--soft-brown);
             font-family: 'Segoe UI', sans-serif;
-        }
-
-        .chat-screenshot {
-            background: #fefae0;
-            border: 1px dashed var(--accent-color);
-            padding: 12px;
-            text-align: center;
-            margin: 15px 0;
-            border-radius: 6px;
-            color: var(--soft-brown);
-            font-style: italic;
-            font-size: 0.95rem;
-        }
-        
-        .dedication {
-            text-align: center;
-            font-style: italic;
-            margin-top: 25px;
-            font-weight: bold;
-            color: var(--accent-color);
+            font-weight: 600;
         }
     </style>
 </head>
@@ -239,70 +260,75 @@
     <div class="book-container">
 
         <!-- 1. HALAMAN COVER DEPAN -->
-        <div id="view-cover" class="page active cover-page">
+        <div id="view-cover" class="view-section active cover-page">
             <div class="cover-image-container">
                 <img src="1791864551227.jpg" alt="Cover Novel Little Diary">
             </div>
             <h1>Little Diary</h1>
             <p>Tentang Waktu yang Kita Isi Bersama</p>
-            <button class="btn" onclick="goToPage('view-menu-bab')">Buka Buku</button>
+            <button class="btn" onclick="showSection('view-menu')">Buka Buku</button>
         </div>
 
         <!-- 2. HALAMAN DAFTAR ISI -->
-        <div id="view-menu-bab" class="page">
-            <h2 class="section-title">Daftar Isi Novel</h2>
-            <p style="font-size: 0.95rem; color: var(--soft-brown); margin-bottom: 10px;">Silakan pilih bagian atau bab yang ingin kamu baca:</p>
+        <div id="view-menu" class="view-section">
+            <div class="reader-header">
+                <h2 class="section-title">Daftar Isi Novel</h2>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--soft-brown);">Pilih bagian atau bab yang ingin kamu baca:</p>
             
             <div class="chapter-grid">
-                <button class="chapter-btn special-section-btn" onclick="loadSpecialContent('pengantar')">Kata Pengantar</button>
-                <button class="chapter-btn special-section-btn" onclick="loadSpecialContent('prolog')">Prolog</button>
-                <button class="chapter-btn" onclick="loadChapter(1)">Bab 1</button>
-                <button class="chapter-btn" onclick="loadChapter(2)">Bab 2</button>
-                <button class="chapter-btn" onclick="loadChapter(3)">Bab 3</button>
-                <button class="chapter-btn" onclick="loadChapter(4)">Bab 4</button>
-                <button class="chapter-btn" onclick="loadChapter(5)">Bab 5</button>
-                <button class="chapter-btn" onclick="loadChapter(6)">Bab 6</button>
-                <button class="chapter-btn" onclick="loadChapter(7)">Bab 7</button>
-                <button class="chapter-btn" onclick="loadChapter(8)">Bab 8</button>
-                <button class="chapter-btn" onclick="loadChapter(9)">Bab 9</button>
-                <button class="chapter-btn" onclick="loadChapter(10)">Bab 10</button>
-                <button class="chapter-btn" onclick="loadChapter(11)">Bab 11</button>
-                <button class="chapter-btn" onclick="loadChapter(12)">Bab 12</button>
-                <button class="chapter-btn" onclick="loadChapter(13)">Bab 13</button>
-                <button class="chapter-btn special-section-btn" onclick="loadSpecialContent('epilog')">Epilog</button>
+                <button class="chapter-btn special-section-btn" onclick="openChapter('pengantar')">Kata Pengantar</button>
+                <button class="chapter-btn special-section-btn" onclick="openChapter('prolog')">Prolog</button>
+                <button class="chapter-btn" onclick="openChapter(1)">Bab 1</button>
+                <button class="chapter-btn" onclick="openChapter(2)">Bab 2</button>
+                <button class="chapter-btn" onclick="openChapter(3)">Bab 3</button>
+                <button class="chapter-btn" onclick="openChapter(4)">Bab 4</button>
+                <button class="chapter-btn" onclick="openChapter(5)">Bab 5</button>
+                <button class="chapter-btn" onclick="openChapter(6)">Bab 6</button>
+                <button class="chapter-btn" onclick="openChapter(7)">Bab 7</button>
+                <button class="chapter-btn" onclick="openChapter(8)">Bab 8</button>
+                <button class="chapter-btn" onclick="openChapter(9)">Bab 9</button>
+                <button class="chapter-btn" onclick="openChapter(10)">Bab 10</button>
+                <button class="chapter-btn" onclick="openChapter(11)">Bab 11</button>
+                <button class="chapter-btn" onclick="openChapter(12)">Bab 12</button>
+                <button class="chapter-btn" onclick="openChapter(13)">Bab 13</button>
+                <button class="chapter-btn special-section-btn" onclick="openChapter('epilog')">Epilog</button>
             </div>
 
             <div class="nav-buttons">
-                <button class="btn btn-secondary" onclick="goToPage('view-cover')">Kembali ke Cover</button>
-                <button class="btn" onclick="goToPage('view-back-cover')">Ke Belakang Buku</button>
+                <button class="btn btn-secondary" onclick="showSection('view-cover')">Sampul Depan</button>
+                <button class="btn" onclick="showSection('view-back-cover')">Sampul Belakang</button>
             </div>
         </div>
 
-        <!-- 3. HALAMAN DINAMIS ISI KONTEN (PENGANTAR, PROLOG, BAB, EPILOG) -->
-        <div id="view-chapter-content" class="page">
-            <h2 id="chapter-title" class="section-title">Judul Bab</h2>
-            <div id="chapter-text" class="chapter-content-body" style="max-height: 420px; overflow-y: auto; padding-right: 10px;">
-                <!-- Isi teks dinamis dimasukkan di sini -->
+        <!-- 3. HALAMAN READER (PEMBACA PER HALAMAN) -->
+        <div id="view-reader" class="view-section">
+            <div class="reader-header">
+                <h2 id="chapter-title" class="section-title">Judul Bab</h2>
+            </div>
+
+            <div id="reader-body" class="reader-body">
+                <!-- Konten halaman yang sedang aktif akan muncul di sini -->
             </div>
 
             <div class="nav-buttons">
-                <button class="btn btn-secondary" onclick="goToPage('view-menu-bab')">Daftar Isi</button>
-                <span id="reading-page-indicator" class="page-number"></span>
-                <button id="btn-next-chapter" class="btn" onclick="nextContent()">Selanjutnya</button>
+                <button id="btn-prev-page" class="btn btn-secondary" onclick="changePage(-1)">← Sebelum</button>
+                <span id="page-indicator" class="page-indicator">Hal 1 dari 1</span>
+                <button id="btn-next-page" class="btn" onclick="changePage(1)">Lanjut →</button>
             </div>
         </div>
 
-        <!-- 4. HALAMAN COVER BELAKANG (BAGIAN BELAKANG BUKU) -->
-        <div id="view-back-cover" class="page back-cover-page">
-            <!-- Tempat gambar belakang buku, silakan ganti atribut src dengan file gambar pilihanmu -->
-            <div class="cover-image-container" style="max-width: 240px;">
-                <img src="back-cover-image.jpg" alt="Ilustrasi Belakang Buku" onerror="this.src='1791866424618.jpg';">
+        <!-- 4. HALAMAN COVER BELAKANG -->
+        <div id="view-back-cover" class="view-section back-cover-page">
+            <div class="cover-image-container" style="max-width: 220px;">
+                <!-- Ganti 'back-cover-image.jpg' dengan file gambarmu nanti -->
+                <img src="1791866424618.jpg" alt="Sampul Belakang Buku" onerror="this.src='1.jpg';">
             </div>
             <h1>Catatan Akhir</h1>
-            <p>Terima kasih telah menemani perjalanan waktu di dalam lembaran Little Diary ini.</p>
-            <div class="nav-buttons" style="width: 100%; border: none; margin-top: 10px; padding: 0;">
-                <button class="btn btn-secondary" onclick="goToPage('view-menu-bab')">Kembali ke Daftar Isi</button>
-                <button class="btn" onclick="goToPage('view-cover')">Kembali ke Cover Depan</button>
+            <p>Terima kasih telah membaca Little Diary sampai halaman terakhir.</p>
+            <div class="nav-buttons" style="width: 100%; border: none;">
+                <button class="btn btn-secondary" onclick="showSection('view-menu')">Daftar Isi</button>
+                <button class="btn" onclick="showSection('view-cover')">Sampul Depan</button>
             </div>
         </div>
 
@@ -701,7 +727,7 @@
                     <p>Ternyata ibu sudah menemukan cokelat yang sejak kemarin kucari.</p>
                     <p>"Ibu udah nemu coklatnya, mau nitip sekalian nggak?"</p>
                     <p>Tanpa berpikir lama, aku langsung mengiyakan.</p>
-                    <p>Saat membaca pesan itu, aku sempat tersenyum kecil sendiri.</p>
+                    <p>Saat membaca pesan itu, aku sempat tersenum kecil sendiri.</p>
                     <p>Setelah dua hari dibuat muter-muter sama hadiah ulang tahun, akhirnya semesta memutuskan sedikit bekerja sama juga.</p>
                     <p>Setelah urusan cokelat akhirnya selesai, aku kembali mengumpulkan niat untuk melanjutkan kerajinan tangan yang sempat kutunda beberapa hari terakhir.</p>
                     <p>Aku mengambil kembali karton, gunting, lem, dan semua perlengkapan yang sebelumnya sudah berantakan di meja belajar.</p>
@@ -1061,7 +1087,7 @@
                     <p>Pada awalnya hari itu berjalan cukup tenang, kami masih sering bertemu, berbincang tentang hal hal sederhana, dan masih berbagi kebahagiaan. Sampai pada akhirnya bom waktu itu meledak.</p>
                     <p>Siang itu suasana kelasnya sebenarnya cukup tenang. Karena wali kelasnya belum datang, aku memutuskan untuk main dan menghabiskan waktu di bangkunya. Kami duduk berdampingan, mengobrol santai tentang hal-hal sederhana, dan masih berbagi kebahagiaan lewat tawa bersama.</p>
                     <p>Momen-momen seperti ini selalu terasa menyenangkan, sampai-sampai membuatku lengah akan rahasia yang sudah lama kusimpan rapat.</p>
-                    <p>Sampai akhirnya, obrolan kami terputus saat langkah kaki terdengar dari koridor. Wali kelasnya tiba-tiba masuk. Karena murid dari kelas lain, otomatis aku harus segera pergi dari sana.</p>
+                    <p>Sampai akhirnya, obrolan kami terputus saat langkah kaki terdengar dari koridor. Wali kelasnya tiba-tiba masuk. Karena aku murid dari kelas lain, otomatis aku harus segera pergi dari sana.</p>
                     <p>Karena terburu-buru harus mengosongkan bangku, aku langsung berdiri dan melangkah cepat keluar. Di tengah ketergesaan itu, ponselku sengaja kutinggalkan begitu saja di atas mejanya agar aman. Layarnya memang dalam keadaan mati, tapi dia tahu kata sandi ponselku karena aku sendiri yang pernah memberi tahunya—sebuah bentuk kepercayaan yang siang itu berbalik menjadi senjata makan tuan.</p>
                     <p>Aku pun kembali ke kelasku sendiri, duduk di bangkuku tanpa tahu sama sekali apa yang sedang terjadi di seberang sana.</p>
                     <p>Ternyata, selama aku pergi, dia membuka ponselku. Didorong rasa penasaran atau entah apa, jemarinya membuka ruang obrolanku dengan Robi. Dia terus menggulir layar, membaca obrolan lama kami dulu banget—waktu aku dan Robi sedang membahas soal rokok. Topik yang selama ini selalu kuhindari di depannya, sebuah fakta yang sudah kusembunyikan rapat-rapat sejak jauh-jauh hari. Lewat chat lawas itu, dia menemukan kenyataan bahwa aku pernah merokok dan telah membohonginya sekian lama.</p>
@@ -1246,69 +1272,111 @@
             }
         };
 
-        let currentKey = null;
+        let currentChapterKey = null;
+        let pagedNodes = [];
+        let currentPageIndex = 0;
 
-        function goToPage(pageId) {
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
+        function showSection(sectionId) {
+            document.querySelectorAll('.view-section').forEach(sec => sec.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        function openChapter(key) {
+            currentChapterKey = key;
+            const chapterData = contentData[key];
+
+            document.getElementById('chapter-title').innerText = chapterData.title;
+
+            // Masukkan teks ke elemen sementara untuk membagi node paragraf/elemen
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = chapterData.content;
+
+            // Ambil semua elemen paragraf/gambar/div
+            const children = Array.from(tempDiv.children);
+
+            // Algoritma Pembagian Halaman (Pagination)
+            pagedNodes = [];
+            let currentPage = [];
+            let currentLength = 0;
+            const maxCharPerPage = 650; // Batas karakter perkiraan per halaman e-book
+
+            children.forEach(child => {
+                const textLen = child.innerText ? child.innerText.length : 100;
+
+                if (currentLength + textLen > maxCharPerPage && currentPage.length > 0) {
+                    pagedNodes.push(currentPage);
+                    currentPage = [];
+                    currentLength = 0;
+                }
+
+                currentPage.push(child);
+                currentLength += textLen;
             });
-            document.getElementById(pageId).classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (currentPage.length > 0) {
+                pagedNodes.push(currentPage);
+            }
+
+            currentPageIndex = 0;
+            renderCurrentPage();
+            showSection('view-reader');
         }
 
-        function loadSpecialContent(key) {
-            currentKey = key;
-            const data = contentData[key];
-            
-            document.getElementById('chapter-title').innerText = data.title;
-            document.getElementById('chapter-text').innerHTML = data.content;
-            document.getElementById('chapter-text').scrollTop = 0;
-            
-            updateNextButton(data.nextKey);
-            goToPage('view-chapter-content');
-        }
+        function renderCurrentPage() {
+            const readerBody = document.getElementById('reader-body');
+            readerBody.innerHTML = '';
 
-        function loadChapter(chapterNum) {
-            currentKey = chapterNum;
-            const data = contentData[chapterNum];
-            
-            document.getElementById('chapter-title').innerText = data.title;
-            document.getElementById('chapter-text').innerHTML = data.content;
-            document.getElementById('chapter-text').scrollTop = 0;
-            
-            updateNextButton(data.nextKey);
-            goToPage('view-chapter-content');
-        }
+            const nodesToDisplay = pagedNodes[currentPageIndex] || [];
+            nodesToDisplay.forEach(node => readerBody.appendChild(node.cloneNode(true)));
 
-        function updateNextButton(nextKey) {
-            const nextBtn = document.getElementById('btn-next-chapter');
-            const indicator = document.getElementById('reading-page-indicator');
-            indicator.innerText = typeof currentKey === 'number' ? `Bab ${currentKey} dari 13` : (currentKey.toUpperCase());
+            // Update Penanda Halaman & Tombol Navigasi
+            const totalPages = pagedNodes.length;
+            document.getElementById('page-indicator').innerText = `Halaman ${currentPageIndex + 1} dari ${totalPages}`;
 
-            if (nextKey !== null) {
-                nextBtn.style.display = "inline-block";
-                nextBtn.setAttribute("data-next", nextKey);
-                if (typeof nextKey === 'number') {
-                    nextBtn.innerText = "Bab Selanjutnya";
+            const prevBtn = document.getElementById('btn-prev-page');
+            const nextBtn = document.getElementById('btn-next-page');
+
+            prevBtn.disabled = (currentPageIndex === 0 && currentChapterKey === 'pengantar');
+
+            if (currentPageIndex === totalPages - 1) {
+                const nextKey = contentData[currentChapterKey].nextKey;
+                if (nextKey === null) {
+                    nextBtn.innerText = "Selesai (Sampul Belakang)";
+                } else if (typeof nextKey === 'number') {
+                    nextBtn.innerText = `Bab ${nextKey} →`;
                 } else if (nextKey === 'epilog') {
-                    nextBtn.innerText = "Ke Epilog";
+                    nextBtn.innerText = "Ke Epilog →";
                 } else if (nextKey === 'prolog') {
-                    nextBtn.innerText = "Ke Prolog";
+                    nextBtn.innerText = "Ke Prolog →";
                 }
             } else {
-                nextBtn.style.display = "none";
+                nextBtn.innerText = "Lanjut →";
             }
         }
 
-        function nextContent() {
-            const nextBtn = document.getElementById('btn-next-chapter');
-            const nextKey = nextBtn.getAttribute("data-next");
-            
-            if (nextKey !== "null" && nextKey !== "") {
-                if (isNaN(nextKey)) {
-                    loadSpecialContent(nextKey);
+        function changePage(direction) {
+            const totalPages = pagedNodes.length;
+
+            if (direction === 1) {
+                if (currentPageIndex < totalPages - 1) {
+                    currentPageIndex++;
+                    renderCurrentPage();
                 } else {
-                    loadChapter(parseInt(nextKey));
+                    // Pindah ke bab berikutnya
+                    const nextKey = contentData[currentChapterKey].nextKey;
+                    if (nextKey !== null) {
+                        openChapter(nextKey);
+                    } else {
+                        showSection('view-back-cover');
+                    }
+                }
+            } else if (direction === -1) {
+                if (currentPageIndex > 0) {
+                    currentPageIndex--;
+                    renderCurrentPage();
+                } else {
+                    // Pindah ke bab sebelumnya jika ada
+                    showSection('view-menu');
                 }
             }
         }
