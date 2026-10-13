@@ -6,12 +6,13 @@
     <title>Little Diary: Tentang Waktu yang Kita Isi Bersama</title>
     <style>
         :root {
-            --bg-color: #f7f9fc;
+            --bg-color: #fcf8f5;
             --card-bg: #ffffff;
-            --text-color: #2c3e50;
-            --accent-color: #3498db;
-            --accent-hover: #2980b9;
-            --border-color: #e2e8f0;
+            --text-color: #4a3b32;
+            --accent-color: #d4a373;
+            --accent-hover: #bc6c25;
+            --border-color: #faedcd;
+            --soft-brown: #8c7355;
         }
 
         * {
@@ -35,9 +36,10 @@
             max-width: 850px;
             width: 100%;
             background-color: var(--card-bg);
-            padding: 50px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(140, 115, 85, 0.12);
+            border: 1px solid var(--border-color);
         }
 
         .page {
@@ -48,55 +50,75 @@
             display: block;
         }
 
+        /* Cover Page Styling */
         .cover-page {
             text-align: center;
-            padding: 40px 20px;
+            padding: 20px;
+        }
+
+        .cover-image-container {
+            width: 100%;
+            max-width: 320px;
+            margin: 0 auto 25px auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            border: 3px solid #faedcd;
+        }
+
+        .cover-image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
         }
 
         .cover-page h1 {
-            font-size: 2.5rem;
-            color: #1a252f;
-            margin-bottom: 15px;
+            font-size: 2.2rem;
+            color: var(--text-color);
+            margin-bottom: 8px;
+            font-family: serif;
         }
 
         .cover-page p {
-            font-size: 1.2rem;
-            color: #7f8c8d;
-            margin-bottom: 30px;
+            font-size: 1.1rem;
+            color: var(--soft-brown);
+            margin-bottom: 25px;
+            text-align: center;
         }
 
         .btn {
-            background-color: var(--accent-color);
+            background-color: var(--accent-hover);
             color: white;
             border: none;
             padding: 12px 30px;
             font-size: 1rem;
             border-radius: 30px;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: background 0.2s, transform 0.1s;
             font-weight: 600;
-            margin-top: 20px;
+            box-shadow: 0 4px 12px rgba(188, 108, 37, 0.2);
         }
 
         .btn:hover {
-            background-color: var(--accent-hover);
+            background-color: #9b581e;
+            transform: translateY(-2px);
         }
 
         .btn-secondary {
-            background-color: #95a5a6;
-            margin-right: 10px;
+            background-color: #dda15e;
         }
 
         .btn-secondary:hover {
-            background-color: #7f8c8d;
+            background-color: #bc6c25;
         }
 
         h2.section-title {
             font-size: 1.6rem;
             margin-bottom: 20px;
-            color: var(--accent-color);
+            color: var(--accent-hover);
             border-bottom: 2px solid var(--border-color);
             padding-bottom: 8px;
+            font-family: serif;
         }
 
         p {
@@ -106,31 +128,38 @@
             font-size: 1.05rem;
         }
 
+        /* Menu Grid for Chapters, Pengantar, Prolog, Epilog */
         .chapter-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: 12px;
             margin-top: 20px;
             margin-bottom: 30px;
         }
 
         .chapter-btn {
-            background-color: #f1f5f9;
+            background-color: #fefae0;
             border: 1px solid var(--border-color);
             padding: 12px;
             border-radius: 8px;
             cursor: pointer;
             text-align: center;
             font-size: 0.95rem;
-            font-weight: 500;
+            font-weight: 600;
             color: var(--text-color);
             transition: all 0.2s;
         }
 
         .chapter-btn:hover {
-            background-color: var(--accent-color);
+            background-color: var(--accent-hover);
             color: white;
-            border-color: var(--accent-color);
+            border-color: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .special-section-btn {
+            background-color: #faedcd;
+            color: #603813;
         }
 
         .nav-buttons {
@@ -142,14 +171,22 @@
         }
 
         .chat-screenshot {
-            background: #f1f5f9;
-            border: 1px dashed #cbd5e1;
+            background: #fefae0;
+            border: 1px dashed var(--accent-color);
             padding: 15px;
             text-align: center;
             margin: 15px 0;
             border-radius: 8px;
-            color: #64748b;
+            color: var(--soft-brown);
             font-style: italic;
+        }
+        
+        .dedication {
+            text-align: center;
+            font-style: italic;
+            margin-top: 30px;
+            font-weight: bold;
+            color: var(--accent-hover);
         }
     </style>
 </head>
@@ -159,48 +196,22 @@
 
         <!-- 1. HALAMAN COVER -->
         <div id="view-cover" class="page active cover-page">
+            <div class="cover-image-container">
+                <img src="1791864551227.jpg" alt="Cover Novel Little Diary">
+            </div>
             <h1>Little Diary</h1>
             <p>Tentang Waktu yang Kita Isi Bersama</p>
-            <button class="btn" onclick="goToPage('view-pengantar')">Baca Buku</button>
+            <button class="btn" onclick="goToPage('view-menu-bab')">Buka Buku</button>
         </div>
 
-        <!-- 2. HALAMAN KATA PENGANTAR -->
-        <div id="view-pengantar" class="page">
-            <h2 class="section-title">Kata Pengantar</h2>
-            <p>Buku ini bukan sekadar kumpulan barisan kata atau rekaan cerita belaka. Setiap lembar yang ada di dalamnya adalah kepingan ingatan, rekam jejak emosi, dan saksi bisu dari sebuah perjalanan tumbuh bersama yang sangat berharga.</p>
-            <p>Little Diary: Tentang Waktu yang Kita Isi Bersama lahir dari perjalanan panjang selama satu tahun—tentang bagaimana dua manusia diawali dari ketidaksengajaan yang sederhana, belajar saling mengenal di tengah keraguan masa lalu, melewati tawa-tawa hangat di koridor sekolah, hingga dipaksa berhadapan dengan retakan dan rasa sakit yang hampir memisahkan.</p>
-            <p>Buku ini ditulis bukan untuk memamerkan kisah cinta yang sempurna, karena pada kenyataannya, perjalanan ini dipenuhi oleh ego, salah paham, dan proses belajar yang melelahkan. Namun justru dari bekas-bekas patahan itulah, buku ini menemukan maknanya: bahwa kebahagiaan paling tulus sering kali hadir dari hal-hal harian yang paling sederhana, dan bahwa hubungan yang kuat adalah hubungan yang mau berjuang untuk menyusun kembali puing-puingnya saat hancur.</p>
-            <p>Ungkapan terima kasih yang paling mendalam ingin kupersembahkan untuk Keyra—seseorang yang menjadi alasan utama mengapa setiap detik dalam cerita ini layak untuk dituliskan dan diingat selamanya. Terima kasih karena selalu hadir, mengajarkan arti ketenangan, dan menolak untuk menyerah bahkan di saat-saat tersulit.</p>
-            <p>Semoga cerita yang tersaji di dalam lembaran-lembaran ini bisa menjadi penanda waktu yang tak lekang oleh zaman. Sebuah pengingat bahwa di antara miliaran manusia dan jutaan detik yang berjalan di dunia ini, pernah ada waktu-waktu indah yang kita isi bersama dengan begitu penuh rasa.</p>
-            <p>Selamat membaca.</p>
-            
-            <div class="nav-buttons">
-                <button class="btn btn-secondary" onclick="goToPage('view-cover')">Kembali ke Cover</button>
-                <button class="btn" onclick="goToPage('view-prolog')">Lanjut ke Prolog</button>
-            </div>
-        </div>
-
-        <!-- 3. HALAMAN PROLOG -->
-        <div id="view-prolog" class="page">
-            <h2 class="section-title">Prolog</h2>
-            <p>Hari itu berjalan seperti biasa. Kami menjalani aktivitas rutin di sekolah, termasuk kegiatan ekstrakurikuler yang sudah menjadi bagian dari keseharian.</p>
-            <p>Entah kenapa, hari itu terasa berbeda. Cuacanya cerah, tidak mendung seperti biasanya, dan suasananya pun terasa lebih bersahabat di tengah padatnya kegiatan.</p>
-            <p>Mungkin karena hal-hal kecil itu, hari tersebut terasa sedikit lebih ringan dari hari-hari sebelumnya.</p>
-            <p>Aku tidak tahu sudah keberapa kali kami bertemu saat itu. Namun yang pasti, aku tidak pernah benar-benar menyadarinya.</p>
-            <p>Aku juga tidak sadar bahwa dari hari yang terlihat biasa itu, kisah kami sebenarnya baru saja akan dimulai.</p>
-            
-            <div class="nav-buttons">
-                <button class="btn btn-secondary" onclick="goToPage('view-pengantar')">Kembali</button>
-                <button class="btn" onclick="goToPage('view-menu-bab')">Pilih Bab Cerita</button>
-            </div>
-        </div>
-
-        <!-- 4. HALAMAN PILIHAN BAB (MENU) -->
+        <!-- 2. HALAMAN DAFTAR MENU (PENGANTAR, PROLOG, BAB 1-13, EPILOG) -->
         <div id="view-menu-bab" class="page">
-            <h2 class="section-title">Daftar Bab Cerita</h2>
-            <p>Silakan pilih bab yang ingin kamu baca:</p>
+            <h2 class="section-title">Daftar Isi Novel</h2>
+            <p>Silakan pilih bagian atau bab yang ingin kamu baca:</p>
             
             <div class="chapter-grid">
+                <button class="chapter-btn special-section-btn" onclick="loadSpecialContent('pengantar')">Kata Pengantar</button>
+                <button class="chapter-btn special-section-btn" onclick="loadSpecialContent('prolog')">Prolog</button>
                 <button class="chapter-btn" onclick="loadChapter(1)">Bab 1</button>
                 <button class="chapter-btn" onclick="loadChapter(2)">Bab 2</button>
                 <button class="chapter-btn" onclick="loadChapter(3)">Bab 3</button>
@@ -214,33 +225,57 @@
                 <button class="chapter-btn" onclick="loadChapter(11)">Bab 11</button>
                 <button class="chapter-btn" onclick="loadChapter(12)">Bab 12</button>
                 <button class="chapter-btn" onclick="loadChapter(13)">Bab 13</button>
+                <button class="chapter-btn special-section-btn" onclick="loadSpecialContent('epilog')">Epilog</button>
             </div>
 
             <div class="nav-buttons">
-                <button class="btn btn-secondary" onclick="goToPage('view-prolog')">Kembali ke Prolog</button>
-                <button class="btn" onclick="loadEpilog()">Epilog</button>
+                <button class="btn btn-secondary" onclick="goToPage('view-cover')">Kembali ke Cover</button>
             </div>
         </div>
 
-        <!-- 5. HALAMAN DINAMIS ISI BAB / EPILOG -->
+        <!-- 3. HALAMAN DINAMIS ISI KONTEN (PENGANTAR, PROLOG, BAB, EPILOG) -->
         <div id="view-chapter-content" class="page">
             <h2 id="chapter-title" class="section-title">Judul Bab</h2>
             <div id="chapter-text">
-                <!-- Isi teks bab lengkap dimasukkan di sini -->
+                <!-- Isi teks dinamis dimasukkan di sini -->
             </div>
 
             <div class="nav-buttons">
-                <button class="btn btn-secondary" onclick="goToPage('view-menu-bab')">Kembali ke Menu Bab</button>
-                <button id="btn-next-chapter" class="btn" onclick="nextChapter()">Bab Selanjutnya</button>
+                <button class="btn btn-secondary" onclick="goToPage('view-menu-bab')">Kembali ke Menu</button>
+                <button id="btn-next-chapter" class="btn" onclick="nextContent()">Selanjutnya</button>
             </div>
         </div>
 
     </div>
 
     <script>
-        const chaptersData = {
+        const contentData = {
+            pengantar: {
+                title: "Kata Pengantar",
+                nextKey: "prolog",
+                content: `
+                    <p>Buku ini bukan sekadar kumpulan barisan kata atau rekaan cerita belaka. Setiap lembar yang ada di dalamnya adalah kepingan ingatan, rekam jejak emosi, dan saksi bisu dari sebuah perjalanan tumbuh bersama yang sangat berharga.</p>
+                    <p>Little Diary: Tentang Waktu yang Kita Isi Bersama lahir dari perjalanan panjang selama satu tahun—tentang bagaimana dua manusia diawali dari ketidaksengajaan yang sederhana, belajar saling mengenal di tengah keraguan masa lalu, melewati tawa-tawa hangat di koridor sekolah, hingga dipaksa berhadapan dengan retakan dan rasa sakit yang hampir memisahkan.</p>
+                    <p>Buku ini ditulis bukan untuk memamerkan kisah cinta yang sempurna, karena pada kenyataannya, perjalanan ini dipenuhi oleh ego, salah paham, dan proses belajar yang melelahkan. Namun justru dari bekas-bekas patahan itulah, buku ini menemukan maknanya: bahwa kebahagiaan paling tulus sering kali hadir dari hal-hal harian yang paling sederhana, dan bahwa hubungan yang kuat adalah hubungan yang mau berjuang untuk menyusun kembali puing-puingnya saat hancur.</p>
+                    <p>Ungkapan terima kasih yang paling mendalam ingin kupersembahkan untuk Keyra—seseorang yang menjadi alasan utama mengapa setiap detik dalam cerita ini layak untuk dituliskan dan diingat selamanya. Terima kasih karena selalu hadir, mengajarkan arti ketenangan, dan menolak untuk menyerah bahkan di saat-saat tersulit.</p>
+                    <p>Semoga cerita yang tersaji di dalam lembaran-lembaran ini bisa menjadi penanda waktu yang tak lekang oleh zaman. Sebuah pengingat bahwa di antara miliaran manusia dan jutaan detik yang berjalan di dunia ini, pernah ada waktu-waktu indah yang kita isi bersama dengan begitu penuh rasa.</p>
+                    <p>Selamat membaca.</p>
+                `
+            },
+            prolog: {
+                title: "Prolog",
+                nextKey: 1,
+                content: `
+                    <p>Hari itu berjalan seperti biasanya. Kami menjalani aktivitas rutin di sekolah, termasuk kegiatan ekstrakurikuler yang sudah menjadi bagian dari keseharian.</p>
+                    <p>Entah kenapa, hari itu terasa berbeda. Cuacanya cerah, tidak mendung seperti biasanya, dan suasananya pun terasa lebih bersahabat di tengah padatnya kegiatan.</p>
+                    <p>Mungkin karena hal-hal kecil itu, hari tersebut terasa sedikit lebih ringan dari hari-hari sebelumnya.</p>
+                    <p>Aku tidak tahu sudah keberapa kali kami bertemu saat itu. Namun yang pasti, aku tidak pernah benar-benar menyadarinya.</p>
+                    <p>Aku juga tidak sadar bahwa dari hari yang terlihat biasa itu, kisah kami sebenarnya baru saja akan dimulai.</p>
+                `
+            },
             1: {
                 title: "BAB 1: Pertemuan yang Tidak Direncanakan",
+                nextKey: 2,
                 content: `
                     <p>Hari itu terasa seperti biasanya.</p>
                     <p>Sekolah berjalan dengan ritme yang sudah hafal di luar kepala—tugas yang menumpuk, suara obrolan di sela istirahat, dan beberapa siswa yang memilih menghabiskan waktu dengan tidur di kelas.</p>
@@ -291,6 +326,7 @@
             },
             2: {
                 title: "BAB 2: Meyakinkan yang Tak Percaya",
+                nextKey: 3,
                 content: `
                     <p>Bagiku, semua orang punya pola yang sama—datang, meyakinkan, lalu menghilang ketika sudah bosan.</p>
                     <p>Itu sebabnya aku tidak mudah percaya.</p>
@@ -339,6 +375,7 @@
             },
             3: {
                 title: "BAB 3: Saat Keyakinan Mulai Tumbuh",
+                nextKey: 4,
                 content: `
                     <p>Ada hal yang tidak aku sadari sejak awal.</p>
                     <p>Perlahan, tanpa terasa, cara pandangku mulai bergeser.</p>
@@ -383,6 +420,7 @@
             },
             4: {
                 title: "BAB 4: Hari Yang Tak Ingin Di Akhiri",
+                nextKey: 5,
                 content: `
                     <p>Hari itu terasa berbeda dari biasanya.</p>
                     <p>Bukan karena ada sesuatu yang spesial terjadi di sekolah, semuanya tetap berjalan seperti biasa. Suara teman-teman yang ramai di kelas, banyak murid lain yang berlalu lalang dari kantin, ada pula yang berolahraga di lapangan.</p>
@@ -530,6 +568,7 @@
             },
             5: {
                 title: "BAB 5: Usaha Kecil Untuk Hari Besarmu",
+                nextKey: 6,
                 content: `
                     <p>Beberapa hari setelah itu, semuanya masih berjalan seperti biasa.</p>
                     <p>Kami masih sering menghabiskan waktu bersama di sekolah, saling bertukar cerita lewat chat sampai larut malam, dan tertawa karena hal-hal kecil yang sebenarnya tidak penting.</p>
@@ -685,6 +724,7 @@
             },
             6: {
                 title: "BAB 6: Retakan Yang Mulai Terlihat",
+                nextKey: 7,
                 content: `
                     <p>Pertengkaran kecil sebenarnya sudah cukup sering terjadi di antara kami sejak lama.</p>
                     <p>Hal-hal sederhana seperti salah paham, nada bicara yang kurang enak didengar, atau rasa cemburu yang kadang muncul tanpa alasan jelas sering berakhir jadi adu argumen kecil.</p>
@@ -752,6 +792,7 @@
             },
             7: {
                 title: "BAB 7: Saat Semuanya Terasa Berlebihan",
+                nextKey: 8,
                 content: `
                     <p>Setelah pertengkaran malam itu, semuanya perlahan mulai terasa lebih melelahkan dari biasanya.</p>
                     <p>Kami masih saling berbicara seperti biasa. Masih saling mengabari, masih menghabiskan waktu bersama, dan masih mencoba mempertahankan hubungan ini sebaik mungkin.</p>
@@ -805,6 +846,7 @@
             },
             8: {
                 title: "BAB 8: Kita, Untuk Sesaat",
+                nextKey: 9,
                 content: `
                     <p>Setelah semua perdebatan yang terasa tidak ada habisnya, ada satu momen di mana semuanya seperti kembali normal.</p>
                     <p>Tidak sepenuhnya pulih, tidak juga benar-benar selesai.</p>
@@ -862,6 +904,7 @@
             },
             9: {
                 title: "BAB 9: Bertahan Di Tengah Lelah?",
+                nextKey: 10,
                 content: `
                     <p>Ada masa di mana hubungan tidak lagi dipenuhi tawa panjang atau percakapan manis sampai larut malam.</p>
                     <p>Semua berubah menjadi usaha untuk tetap bertahan.</p>
@@ -942,6 +985,7 @@
             },
             10: {
                 title: "BAB 10: Akhir Dari Hubungan Ini",
+                nextKey: 11,
                 content: `
                     <p>Tidak semua hubungan berakhir karena hilangnya rasa sayang.</p>
                     <p>Kadang, sebuah hubungan karam justru karena kepercayaan yang perlahan keropos oleh kesalahan yang sebenarnya bisa dicegah sejak awal. Dan sayangnya, aku baru memahami kebenaran pahit itu setelah semuanya benar-benar terlambat.</p>
@@ -985,6 +1029,7 @@
             },
             11: {
                 title: "BAB 11: Hal Yang Tak Pernah Kamu Ceritakan",
+                nextKey: 12,
                 content: `
                     <p>Tidak semua hubungan berakhir karena hilangnya rasa sayang.</p>
                     <p>Kadang, sebuah hubungan karam justru karena rasa percaya yang secara perlahan dikhianati oleh kepura-puraan yang dikemas begitu rapi. Dan sialnya, aku dipaksa menerima kenyataan pahit itu saat aku sedang sayang-sayangnya. Saat aku berpikir bahwa kami sudah berhasil melewati badai dan siap untuk memulai semuanya dari awal lagi.</p>
@@ -1001,7 +1046,7 @@
                     <p>Karena terburu-buru harus mengosongkan bangku saat guruku datang, dia langsung berdiri dan melangkah cepat keluar kembali ke kelasnya. Di tengah ketergesaan itu, ponselnya sengaja ditinggalkan begitu saja di atas mejaku agar aman.</p>
                     <p>Aku menatap ponsel yang tergeletak itu. Dengan jemari bergetar, aku membuka ruang obrolannya dengan Robi. Aku terus menggulir layar, membaca obrolan lama mereka saat dia dan Robi sedang membahas soal rokok. Topik yang selama ini selalu dia hindari di depanku, sebuah fakta yang sudah dia sembunyikan rapat-rapat sejak jauh-jauh hari. Lewat chat lawas itu, aku menemukan kenyataan pahit bahwa dia pernah merokok dan telah membohongiku sekian lama.</p>
                     <p>Beberapa saat kemudian, aku merapikan ponselnya dengan tangan gemetar. Dadaku rasanya sesak, dihantam rasa kecewa yang luar biasa. Aku melangkah keluar kelas, berjalan menuju koridor kelasnya yang sepi, lalu mengetuk pintu kelasnya untuk memanggilnya keluar.</p>
-                    <p>Dia melangkah ke koridor dengan ekspresi bingung. Di lorong kelas yang sepi itu, suasana hangat yang kami bagi beberapa menit lalu sudah menguap tanpa sisa. Aku berdiri di hadapannya sambil membawa ponselnya, menatapnya dengan tatapan mata yang dipenuhi rasa kecewa dan terluka. Di lorong itulah, bom waktu yang dia simpan akhirnya meledak, saat aku menuntut penjelasan atas semua kebohongan yang baru saja kutemukan.</p>
+                    <p>Dia melangkah ke koridor dengan ekspresi bingung. Di lorong kelas yang sepi itu, suasana hangat yang kami bagi beberapa menit lalu sudah menguap tanpa sisa. Aku berdiri di hadapannya sambil membawa ponselnya, menatapnya dengan tatapan mata yang dipenuhi rasa kecewa dan terluka. Di lorong itulah, bom waktu yang dia simpan akhirnya meledak, saat dia menuntut penjelasan atas semua kebohongan yang baru saja kutemukan.</p>
                     <p>"Jujur, pernah ngerokok ga?" tanyaku, mencoba melihat jelas apakah wajahnya bisa menyembunyikan perasaan bersalah.</p>
                     <p>"Ngga, aku ngga ngerokok," jawabnya cepat.</p>
                     <p>Mendengar jawaban itu, hatiku semakin hancur. Dia masih berusaha keras menutup-nutupi fakta bahwa dia memang pernah merokok.</p>
@@ -1022,6 +1067,7 @@
             },
             12: {
                 title: "BAB 12: Menyusun Kembali Puing-Puing Yang Hancur",
+                nextKey: 13,
                 content: `
                     <p>Mengucapkan sebuah janji di tengah keputusasaan adalah hal yang mudah, namun menghidupi janji itu di saat kita tidak lagi memiliki status apa pun adalah ujian yang sebenarnya.</p>
                     <p>Malam itu, aku telah memilih jalan hidupku sendiri ketika kalimat bersyaratmu keluar. Saat kamu bilang hubungan ini bisa diselamatkan jika aku bisa meyakinkanmu, aku tidak berpikir panjang untuk mengiyakannya. Aku sadar, kesalahpahaman kemarin telah meruntuhkan kepercayaanmu sampai ke dasar, dan satu-satunya cara untuk membangunnya kembali adalah dengan pembuktian yang tidak sebentar. Aku harus bertaruh dengan waktu, rasa lelah, dan yang paling berat: ketidakpastian apakah usahaku akan membuahkan hasil atau berakhir sia-sia.</p>
@@ -1062,6 +1108,7 @@
             },
             13: {
                 title: "BAB 13: Waktu Yang Telah Kita Lalui",
+                nextKey: "epilog",
                 content: `
                     <p>Tidak ada yang benar-benar sama setelah sebuah cangkir retak kembali disatukan. Bekas patahannya akan tetap di sana, menjadi pengingat bahwa kami pernah hampir saling kehilangan.</p>
                     <p>Kembali bersama bukanlah tentang menghapus masa lalu atau berakting seolah-olah pertengkaran hebat dan air mata itu tidak pernah terjadi. Ini adalah tentang melangkah lagi dengan kesadaran baru—bahwa jalan yang kami tempuh tidak pernah benar-benar lurus. Kami telah melewati malam-malam yang dingin, kebohongan yang melukai, keraguan yang menumpuk, hingga keputusasaan yang hampir membuat kami menyerah.</p>
@@ -1106,7 +1153,7 @@
                     <p>Namun, semakin aku mencoba merangkai semua ingatan itu menjadi kalimat, semakin aku menyadari satu hal: tidak semua hal di dunia ini ditakdirkan untuk bisa diceritakan.</p>
                     <p>Ada perasaan-perasaan tertentu yang sifatnya terlalu padat, terlalu utuh, dan terlalu luas untuk diperkecil menjadi sekadar barisan huruf di atas kertas. Bahasa manusia sering kali terlalu terbatas untuk menampung luapan emosi yang begitu nyata.</p>
                     <p>Kata "bahagia" terasa terlalu singkat untuk menggambarkan bagaimana dadaku berdetak kencang setiap kali berjalan di sampingnya. Kata "nyaman" terasa terlalu dangkal untuk menjelaskan rasa aman yang hadir saat menatap matanya. Dan kata "cinta" terasa tidak cukup tebal untuk membungkus seluruh proses tumbuh, patah, dan bersatunya kembali dua kepala yang pernah hampir menyerah ini.</p>
-                    <p>Beberapa hal memang terlalu berharga untuk ditumpahkan begitu saja. Ada rasa hangat yang hanya bisa dipahami saat jemari kami saling menyentuh di sela riuhnya kegiatan sekolah. Ada ketenangan yang hanya bisa dirasakan saat kita duduk berdiam di samping kelasnya di tengah sunyinya siang hari setelah kegiatan PORAK usai. Dan ada momen-momen manis yang sengaja biarlah menjadi rahasia kecil—sebuah tempat perlindungan yang hanya dimiliki oleh aku, dia, dan waktu yang pernah kita lewati bersama.</p>
+                    <p>Beberapa hal memang terlalu berharga untuk ditumpahkan begitu saja. Ada rasa hangat yang hanya bisa dipahami saat jemari kami saling menyentuh di sela riuhnya kegiatan sekolah. Ada ketenangan yang hanya bisa dirasakan saat kita duduk berdiam di samping kelasnya di tengah sunyinya siang hari setelah kegiatan PORAK usai. Dan ada momen-momen manis yang sengaja biarlah menjadi rahasia kecil—sebuah tempat perlindungan yang hanya dimiliki oleh aku, dia, dan waktu yang pernah kami lewati bersama.</p>
                     <p>Memaksa menceritakan setiap detail kecil justru terasa seperti merampas keajaiban dari momen itu sendiri. Biarlah bagian-bagian yang tidak tertulis itu tetap berada di tempatnya yang paling alami: tersimpan rapi di dalam ingatan dan bersemayam hangat di balik lipatan hatiku. Biarlah detail-detail yang tak terucapkan itu menjadi ruang sunyi yang bisa kukunjungi kapan saja setiap kali aku rindu pada indahnya hari-hari yang pernah kami rakit bersama.</p>
                     <p>Aku sadar bahwa tulisan ini tidak akan pernah mampu merekam seluruh perjalanan satu tahun kami secara sempurna.</p>
                     <p>Tulisan ini hanyalah sketsa kasar dari sebuah bangunan ingatan yang jauh lebih indah dan rumit. Namun bagiku, itu sudah lebih dari cukup. Sebab pada akhirnya, yang terpenting bukanlah seberapa tebal lembaran kertas yang sanggup kutuliskan, bukan pula seberapa banyak kalimat indah yang berhasil kurangkai untuk memamerkan kisah ini kepada dunia.</p>
@@ -1116,6 +1163,7 @@
             },
             epilog: {
                 title: "Epilog",
+                nextKey: null,
                 content: `
                     <p>Hari itu, aku menatap seragam sekolahku yang tergantung rapi di sudut kamar. Di sela-sela keheningan malam, pikiranku melayang kembali menelusuri setiap babak yang pernah kita lalui bersama selama satu tahun terakhir.</p>
                     <p>Perjalanan 365 hari ini bukanlah garis lurus yang selalu diisi tawa. Kita memulai semuanya dari keraguan dan rasa takut akan luka lama, berjalan melewati masa-masa hangat yang manis, hingga akhirnya diterjang benturan keras yang dipicu oleh ego, kepura-puraan, dan kebohongan. Kita pernah berada di titik paling bawah—titik di mana rasa percaya runtuh total dan kalimat perpisahan sempat memisahkan kita.</p>
@@ -1138,7 +1186,7 @@
             }
         };
 
-        let currentActiveChapter = 1;
+        let currentKey = null;
 
         function goToPage(pageId) {
             document.querySelectorAll('.page').forEach(page => {
@@ -1148,40 +1196,55 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        function loadSpecialContent(key) {
+            currentKey = key;
+            const data = contentData[key];
+            
+            document.getElementById('chapter-title').innerText = data.title;
+            document.getElementById('chapter-text').innerHTML = data.content;
+            
+            updateNextButton(data.nextKey);
+            goToPage('view-chapter-content');
+        }
+
         function loadChapter(chapterNum) {
-            currentActiveChapter = chapterNum;
-            const data = chaptersData[chapterNum];
+            currentKey = chapterNum;
+            const data = contentData[chapterNum];
             
             document.getElementById('chapter-title').innerText = data.title;
             document.getElementById('chapter-text').innerHTML = data.content;
             
+            updateNextButton(data.nextKey);
+            goToPage('view-chapter-content');
+        }
+
+        function updateNextButton(nextKey) {
             const nextBtn = document.getElementById('btn-next-chapter');
-            if (chapterNum >= 13) {
-                nextBtn.innerText = "Ke Epilog";
-                nextBtn.setAttribute("onclick", "loadEpilog()");
+            if (nextKey !== null) {
+                nextBtn.style.display = "inline-block";
+                nextBtn.setAttribute("data-next", nextKey);
+                if (typeof nextKey === 'number') {
+                    nextBtn.innerText = "Bab Selanjutnya";
+                } else if (nextKey === 'epilog') {
+                    nextBtn.innerText = "Ke Epilog";
+                } else if (nextKey === 'prolog') {
+                    nextBtn.innerText = "Ke Prolog";
+                }
             } else {
-                nextBtn.innerText = "Bab Selanjutnya";
-                nextBtn.setAttribute("onclick", "nextChapter()");
+                nextBtn.style.display = "none";
             }
-
-            goToPage('view-chapter-content');
         }
 
-        function loadEpilog() {
-            const data = chaptersData['epilog'];
-            document.getElementById('chapter-title').innerText = data.title;
-            document.getElementById('chapter-text').innerHTML = data.content;
-            
+        function nextContent() {
             const nextBtn = document.getElementById('btn-next-chapter');
-            nextBtn.innerText = "Kembali ke Menu";
-            nextBtn.setAttribute("onclick", "goToPage('view-menu-bab')");
-
-            goToPage('view-chapter-content');
-        }
-
-        function nextChapter() {
-            if (currentActiveChapter < 13) {
-                loadChapter(currentActiveChapter + 1);
+            const nextKey = nextBtn.getAttribute("data-next");
+            
+            if (nextKey !== "null" && nextKey !== "") {
+                if (isNaN(nextKey)) {
+                    loadSpecialContent(nextKey);
+                } else {
+                    loadChapter(parseInt(nextKey));
+                }
             }
         }
     </script>
